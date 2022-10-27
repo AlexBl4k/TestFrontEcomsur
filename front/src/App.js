@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { AppRouter } from './AppRouter'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
-
 const App = () => {
   // -------------------------------------------------
   // DO NOT USE THE CODE BELOW FROM LINES 8 TO 18. THIS IS

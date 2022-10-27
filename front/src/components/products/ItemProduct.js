@@ -1,8 +1,17 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { addProduct } from '../../reducers/cartReducer'
 import { server } from '../../services/server'
+import { Stars } from '../Stars'
 
 export const ItemProduct = (product) => {
+    const dispatch = useDispatch()
+    const handleAddToCart = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        dispatch( addProduct( product ))
+    }
   return (
     <div className='product'>
         <Link to={`product/${product._id}`}>
@@ -19,12 +28,14 @@ export const ItemProduct = (product) => {
             <p className='category'>{product.category}</p>
         </div>
         <p className='price'>${product.price}</p>
-        <p className='rating'>{product.rating}</p>
+        <Stars star={product.rating}/>
         <p className='numReviews'>{product.numReviews} reviews</p>
         </div>
         <div className='button'>
-            <button className='btn'>
-            Añadir al carrito
+            <button className='btn' disabled={product.countInStock < 1} onClick={(e)=>handleAddToCart(e)}>
+                {
+                    (product.countInStock < 1) ? 'Not available' : 'Add to cart'
+                }
             </button>
             <div>
             <Link to={`product/${product._id}`} className='btn'>More Info</Link>

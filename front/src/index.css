@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css");
+
 * {
   margin: 0;
   padding: 0;
@@ -59,15 +61,15 @@ header ul li {
 header ul li a {
   font-weight: bold;
 }
-header .cart {
+header .cart_logo {
   position: relative;
   cursor: pointer;
 }
-header .cart box-icon{
+header .cart_logo box-icon{
   width: 45px;
   height: 45px;
 }
-header .cart span {
+header .cart_logo span {
   position: absolute;
   top: -1rem;
   right: -1.5rem;
@@ -97,7 +99,6 @@ header .cart span {
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 3rem 2rem;
   box-sizing: border-box;
-
 }
 .product{
   display: flex;
@@ -152,18 +153,10 @@ header .cart span {
   display: flex;
   justify-content: center;
 }
-.footer_product .rating {
-  color: #1a202c;
-  font-size: 2rem;
-  display: flex;
-  justify-content: flex-end;
-}
 .footer_product .numReviews {
   font-weight: 700;
   color: rgba(0, 0, 0, .555);
   font-size: 18px;
-  display: flex;
-  justify-content: flex-end;
 }
 .product .button{
   width: 50%;
@@ -207,11 +200,198 @@ header .cart span {
   color: white;
 }
 
-@media only screen and (max-width: 380px){
-  header ul {
-    display: none;
+.stars-gray {
+  display: inline-block;
+}
+
+.stars-yellow {
+  position:static;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+
+.stars-yellow::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #f8ce0b;
+}
+
+.carts{
+  padding: 5rem 1rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 3rem 2rem;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+.cart{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 10px 10px 2px rgba(0, 0, 0, .6);
+  border: 6px solid transparent;
+  border-radius:  5px;
+  padding-top: 10px;
+  margin-top: 2rem;
+
+}
+.cart h2{
+  text-align: center;
+  font-size: 2rem;
+}
+
+.cart_center{
+  width: 90%;
+  margin: 0 auto;
+}
+.item_cart{
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  width: 80%;
+  margin: 2rem auto;
+  box-shadow: 0 1px 10px black;
+  border-radius: 5px;
+}
+.item_cart img{
+  width: 9rem;
+  margin-top: 1rem;
+  margin-left: 5px;
+}
+.item_cart h3{
+  margin-top: 1.5rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.item_cart .price{
+  color: #1a202c;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: start;
+  margin-left: -1rem;
+}
+.item_cart box-icon{
+  fill: red;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-top: .3rem;
+}
+.item_cart .cant{
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: .5rem;
+}
+.item_cart .item_remove box-icon{
+  width: 60px;
+  height: 80px;
+  fill:black;
+  margin-top: 2rem;
+}
+
+.cart_footer{
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.cart_footer h3{
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.cart_footer .btn{
+  display: inline-block;
+  padding: .3rem 1rem;
+  font-size: 1.2rem;
+  background-color: cadetblue;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+  height: 50%;
+  border-radius: 5px;
+}
+.cart_footer .btn:hover{
+  background-color: cornflowerblue;
+  color: white;
+}
+
+@media only screen and (max-width: 420px){
+  header {
+    width: 93%;
+  }
+  .container{
+    width: 100%;
+  }
+  .product{
+    width: 95%;
+  }
+  .image_product img{
+    width: 250px;
+  }
+}
+
+@media only screen and (min-width: 540px) and (max-width:1280px){
+  header {
+    width: 95%;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width:1280px){
+  header {
+    width: 97%;
+  }
+}
+
+@media only screen and (max-width: 280px){
+  header {
+    width: 90%;
+  }
+  .product{
+    width: 90%;
+  }
+  .image_product img{
+    width: 250px;
   }
   .container{
     width: 130%;
+  }
+}
+
+
+@media only screen and (max-width: 1000px){
+  .item_cart{
+    width: 92%;
+  }
+}
+
+@media only screen and (max-width: 777px){
+  .cart{
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+  }
+  .item_cart h3{
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 450px){
+
+  .item_cart img{
+    width: 7rem;
+  }
+}
+
+@media only screen and (max-width: 280px){
+
+  .item_cart img{
+    width: 5rem;
   }
 }
