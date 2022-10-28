@@ -10,53 +10,77 @@ export const addProduct = ( product ) => {
     return async (dispatch, getState) => {
         try {
             const cart = getState().cartReducer
-            const check = cart.some(( {_id} ) => _id === newProduct._id)
-            if( check ) {
-                const product = cart.map( product => {
+            const exists = cart.some(( {_id} ) => _id === newProduct._id)
+            if( exists ) {
+                const products = cart.map( product => {
                     return (
                         (product._id === newProduct._id) 
                             ? { ...product, select: product.select+1 <= product.countInStock ? ++product.select :  product.select }
-                            : newProduct
+                            : product
                     )
                 })
-                localStorage.setItem('productsCart',JSON.stringify( product ))
+                localStorage.setItem('productsCart',JSON.stringify( products ))
                 dispatch({
                     type: 'add-product',
-                    payload: product
+                    payload: products
                 })
             } else {
-                const product = [...cart, newProduct ]
-                localStorage.setItem('productsCart',JSON.stringify( product ))
-                dispatch({
+                const products = [...cart, newProduct ]
+                localStorage.setItem('productsCart',JSON.stringify( products ))
+                                dispatch({
                     type: 'add-product',
-                    payload: product
+                    payload: products
                 })
             }
 
         } catch (error) {
-            console.log('Error al agregar el productos')
+            console.log('Error al agregar el producto')
         }
     }
 }
+
 export const deleteProduct = ({ _id }) => {
     return async (dispatch, getState) => {
         try {
-            const cart = getState().cartReducer
-            const products = cart.map(( product ) =>{
+            const cartState = getState().cartReducer
+            const products = cartState.map(( product ) =>{
                 return (
                     (product._id === _id ) 
                         ? {...product, select: --product.select, }
                         : product
                     )
             })
-            const product = products.filter( product => product.select > 0 )
-            localStorage.setItem('productsCart',JSON.stringify( product ))
+            const cart = products.filter( product => product.select > 0 )
+            localStorage.setItem('productsCart',JSON.stringify( cart ))
             dispatch({
                 type: 'delete-product',
-                payload: product
+                payload: cart
             })
         } catch (error) {
-            console.log('Error al agregar el productos')
+            console.log('Error al eliminar el producto')
+        }
+    }
+}
+
+export const deleteAllProduct = ({_id}) => {
+    return async (dispatch, getState) => {
+        try {
+            const cartState = getState().cartReducer
+            const products = cartState.map(( product ) =>{
+                return (
+                    (product._id === _id ) 
+                        ? {...product, select: 0, }
+                        : product
+                    )
+            })
+            const cart = products.filter( product => product.select > 0 )
+            localStorage.setItem('productsCart',JSON.stringify( cart ))
+            dispatch({
+                type: 'delete-all-product',
+                payload: cart
+            })
+        } catch (error) {
+            console.log('Error al eliminar el producto')
         }
     }
 }
@@ -69,7 +93,9 @@ export const cartReducer = (state = initialState, action) => {
             return action.payload
         case 'delete-product':
             return action.payload
+        case 'delete-all-product':
+            return action.payload
         default:
-            return state;
+            return state
     }
 }

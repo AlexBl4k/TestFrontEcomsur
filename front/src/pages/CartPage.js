@@ -18,7 +18,9 @@ export const CartPage = () => {
 
     }, [cartReducer])
     
-
+    const handlepayment = () => {
+        window.alert('Sorry, Proximamente!!!')
+    }
     return (
         <div className="carts">
             <div className="cart">
@@ -32,7 +34,7 @@ export const CartPage = () => {
                 </div>
                 <div className='cart_footer'>
                     <h3>Total: $ {totalPrice}</h3>
-                    <button className='btn' disabled={cartReducer.length <1}>Payment</button>
+                    <button className='btn' disabled={cartReducer.length <1} onClick={() => handlepayment()}>Payment</button>
                 </div>
             </div>
         </div>

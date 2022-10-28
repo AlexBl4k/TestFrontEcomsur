@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { addProduct, deleteProduct } from '../reducers/cartReducer'
+import { addProduct, deleteAllProduct, deleteProduct } from '../reducers/cartReducer'
 import { server } from '../services/server'
 
 export const ItemCart = (product) => {
@@ -10,9 +10,19 @@ export const ItemCart = (product) => {
       dispatch( deleteProduct( product ))
 
   }
+
+  const handleDeleteAll = () => {
+    dispatch( deleteAllProduct( product))
+
+  }
   const handleAddToCart = () => {
-    dispatch( addProduct( product ))
-}
+    if(product.select>=product.countInStock){
+      window.alert('Sorry, no more in stock')
+    } else {
+      dispatch( addProduct( product ))
+    }
+
+  }
   return (
     <div className='item_cart'>
         <img src={`${server}${product.image}`} alt={product.name}/>
@@ -25,7 +35,7 @@ export const ItemCart = (product) => {
           <p className='cant'>{product.select}</p>
           <box-icon name="down-arrow" type="solid" onClick={() => handelDeleteProduct()}></box-icon>
       </div>
-      <div className='item_remove' onClick={() => handelDeleteProduct()}>
+      <div className='item_remove' onClick={() => handleDeleteAll()}>
           <box-icon name="trash"></box-icon>
       </div>
     </div>

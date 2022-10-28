@@ -27,7 +27,6 @@ export const AppRouter = () => {
                 <Route exact path="/" element={<ProductsPage/>}/>
                 <Route exact path="/product/:_id" element={<InfoProductPage/>}/>
                 <Route exact path="/cart" element={<CartPage/>}/>
-                <Route exact path="/" element={<Navigate replace to={'/'}/>}/>
             </Routes>
             </Router>
         </div>

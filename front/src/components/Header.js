@@ -24,7 +24,7 @@ export const Header = () => {
       <ul>
         <li>
           <Link to={'/'}>
-          <a>Products</a>
+            <span>Products</span>
           </Link>
         </li>
       </ul>

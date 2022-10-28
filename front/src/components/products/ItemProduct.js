@@ -7,10 +7,12 @@ import { Stars } from '../Stars'
 
 export const ItemProduct = (product) => {
     const dispatch = useDispatch()
-    const handleAddToCart = (e) => {
-        e.stopPropagation()
-        e.preventDefault()
-        dispatch( addProduct( product ))
+    const handleAddToCart = () => {
+        if(product.countInStock < 1 ){
+          window.alert('Sorry, no more in stock')
+        } else {
+          dispatch( addProduct( product ))
+        }
     }
   return (
     <div className='product'>
@@ -32,7 +34,7 @@ export const ItemProduct = (product) => {
         <p className='numReviews'>{product.numReviews} reviews</p>
         </div>
         <div className='button'>
-            <button className='btn' disabled={product.countInStock < 1} onClick={(e)=>handleAddToCart(e)}>
+            <button className='btn' disabled={product.countInStock < 1} onClick={()=>handleAddToCart()}>
                 {
                     (product.countInStock < 1) ? 'Not available' : 'Add to cart'
                 }
